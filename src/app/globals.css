@@ -16,12 +16,19 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  body {
+    @apply bg-gradient-to-r bg-customGray;
+  }
+}
+
+/*custom classNames*/
+@layer components {
+  .formInput {
+    @apply w-full flex-shrink-0 rounded-md border border-stone-100 bg-white focus:outline-yellow-500 text-xs p-3 h-11 placeholder:text-gray-300;
+  }
+
+  .inputLabel {
+    @apply block text-gray-600 text-xs font-normal mb-2;
+  }
 }
