@@ -1,13 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./components/sidebar";
 import Topbar from "./components/topbar";
 import { AuthProvider } from "./contexts/authContext";
-import { SidebarProvider } from "./contexts/sidebarContext";
+import { SidebarProvider, useSidebar } from "./contexts/sidebarContext";
 import { Montserrat } from "next/font/google";
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 import "./globals.css";
- 
+
 const inter = Montserrat({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -15,9 +15,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname()
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const pathname = usePathname();
   const isLoginPage = pathname === "/login";
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   return (
     <html lang="en">
@@ -28,10 +32,13 @@ export default function RootLayout({
               <div>{children}</div>
             ) : (
               <div className="flex">
-                <div className="w-72">
-                  <Sidebar />
+                <div className={!isSidebarOpen ? "w-0" : "w-72"}>
+                  <Sidebar
+                    isSidebarOpen={isSidebarOpen}
+                    toggleSidebar={toggleSidebar}
+                  />
                 </div>
-                <div className="flex-grow">
+                <div className={!isSidebarOpen ? "flex-grow" : "flex-grow"}>
                   <Topbar />
                   {children}
                 </div>
@@ -43,4 +50,3 @@ export default function RootLayout({
     </html>
   );
 }
-

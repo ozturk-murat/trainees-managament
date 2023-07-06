@@ -1,12 +1,9 @@
-
 import { AiOutlineHome } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
 import { PiGraduationCap } from "react-icons/pi";
 import { RiMoneyDollarBoxLine } from "react-icons/ri";
 import { HiOutlineDocumentDownload } from "react-icons/hi";
 import { LuSquareEqual } from "react-icons/lu";
-
-
 
 const sidebarData = [
   { id: 1, name: "Home", path: "/", icon: AiOutlineHome },
@@ -16,6 +13,5 @@ const sidebarData = [
   { id: 5, name: "Report", path: "/report", icon: HiOutlineDocumentDownload },
   { id: 6, name: "Settings", path: "/settings", icon: LuSquareEqual },
 ];
-
 
 export { sidebarData };

@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface SidebarContextType {
   activePage: string;
   setActivePage: (page: string) => void;
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: (isOpen: boolean) => void;
+  sidebarToogle: boolean;
+  setSidebarToogle: (isOpen: boolean) => void;
 }
 
 const SidebarContext = createContext<SidebarContextType | null>(null);
@@ -12,17 +12,19 @@ const SidebarContext = createContext<SidebarContextType | null>(null);
 export const useSidebar = () => {
   const context = useContext(SidebarContext);
   if (!context) {
-    throw new Error('useSidebar must be used within a SidebarProvider');
+    throw new Error("useSidebar must be used within a SidebarProvider");
   }
   return context;
 };
 
-export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activePage, setActivePage] = useState('/');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [activePage, setActivePage] = useState("/");
+  const [sidebarToogle, setSidebarToogle] = useState(true);
 
   useEffect(() => {
-    const savedActivePage = sessionStorage.getItem('activePage');
+    const savedActivePage = sessionStorage.getItem("activePage");
     if (savedActivePage) {
       setActivePage(savedActivePage);
     }
@@ -30,15 +32,22 @@ export const SidebarProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const handleSetActivePage = (page: string) => {
     setActivePage(page);
-    sessionStorage.setItem('activePage', page);
+    sessionStorage.setItem("activePage", page);
   };
 
-  const handleSetIsSidebarOpen = (isOpen: boolean) => {
-    setIsSidebarOpen(isOpen);
+  const toggleSidebar = (isOpen: boolean) => {
+    setSidebarToogle(isOpen);
   };
 
   return (
-    <SidebarContext.Provider value={{ activePage, setActivePage: handleSetActivePage, isSidebarOpen, setIsSidebarOpen: handleSetIsSidebarOpen }}>
+    <SidebarContext.Provider
+      value={{
+        activePage,
+        setActivePage: handleSetActivePage,
+        sidebarToogle,
+        setSidebarToogle: toggleSidebar,
+      }}
+    >
       {children}
     </SidebarContext.Provider>
   );

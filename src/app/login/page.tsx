@@ -9,41 +9,40 @@ const LoginPage: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  //Temporary login action
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Kullanıcı adı ve şifreyi kullanarak giriş yapma işlemini gerçekleştir
     if (username === "admin@gmail.com" && password === "admin123") {
       authContext.login();
-      router.push("/"); // Anasayfaya yönlendir
+      router.push("/");
     } else {
-      // Giriş başarısız
       alert("Username or password incorrect!");
     }
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between p-44 bg-gradient-to-r from-yellow-500 to-amber-300">
-      <div className="flex justify-center flex-col items-center lg:w-4/12 md:w-10/12 sm:w-11/12 h-3/4 bg-white rounded-xl shadow px-7 py-11">
-        <div className="flex justify-center items-center w-full">
-          <div className="w-1 h-8 bg-amber-300"></div>
-          <div className="text-black text-4xl font-bold pl-2 whitespace-nowrap">
+    <div className="flex min-h-screen flex-col items-center justify-between bg-gradient-to-r from-yellow-500 to-amber-300 p-44">
+      <div className="flex h-3/4 flex-col items-center justify-center rounded-xl bg-white px-7 py-11 shadow sm:w-11/12 md:w-10/12 lg:w-4/12">
+        <div className="flex w-full items-center justify-center">
+          <div className="h-8 w-1 bg-amber-300"></div>
+          <div className="whitespace-nowrap pl-2 text-4xl font-bold text-black">
             MANAGE COURSES
           </div>
         </div>
 
-        <div className="flex justify-center flex-col items-center w-full pt-11">
-          <div className="text-black text-[22px] font-semibold uppercase pb-2">
+        <div className="flex w-full flex-col items-center justify-center pt-11">
+          <div className="pb-2 text-[22px] font-semibold uppercase text-black">
             SIGN IN
           </div>
-          <div className="text-neutral-500 text-[14px] font-normal">
+          <div className="text-[14px] font-normal text-neutral-500">
             Enter your credentials to access your account
           </div>
         </div>
 
-        <div className="w-full mt-14">
+        <div className="mt-14 w-full">
           <form
             onSubmit={handleLogin}
-            className="flex justify-center items-center flex-col w-full"
+            className="flex w-full flex-col items-center justify-center"
           >
             <div className="mb-7 w-full">
               <label className="inputLabel" htmlFor="email">
@@ -73,17 +72,17 @@ const LoginPage: React.FC = () => {
               />
             </div>
             <button
-              className=" bg-yellow-500 w-full text-white text-[14px] font-medium h-11 rounded"
+              className=" h-11 w-full rounded bg-yellow-500 text-[14px] font-medium text-white"
               type="submit"
             >
               SIGN IN
             </button>
           </form>
-          <div className="w-full flex justify-center mt-7">
-            <span className="text-neutral-500 text-[14px] font-normal">
+          <div className="mt-7 flex w-full justify-center">
+            <span className="text-[14px] font-normal text-neutral-500">
               Forgot your password?&nbsp;
             </span>
-            <span className="text-yellow-500 text-[14px] font-normal underline">
+            <span className="text-[14px] font-normal text-yellow-500 underline">
               Reset Password
             </span>
           </div>
