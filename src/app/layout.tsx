@@ -7,6 +7,7 @@ import { SidebarProvider, useSidebar } from "./contexts/sidebarContext";
 import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 import "./globals.css";
+import { StudentsProvider } from "./contexts/studentsContext";
 
 const inter = Montserrat({ subsets: ["latin"] });
 
@@ -27,24 +28,26 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={inter.className}>
         <AuthProvider>
-          <SidebarProvider>
-            {isLoginPage ? (
-              <div>{children}</div>
-            ) : (
-              <div className="flex">
-                <div className={!isSidebarOpen ? "w-0" : "w-72"}>
-                  <Sidebar
-                    isSidebarOpen={isSidebarOpen}
-                    toggleSidebar={toggleSidebar}
-                  />
+          <StudentsProvider>
+            <SidebarProvider>
+              {isLoginPage ? (
+                <div>{children}</div>
+              ) : (
+                <div className="flex">
+                  <div className={!isSidebarOpen ? "w-0" : "w-72"}>
+                    <Sidebar
+                      isSidebarOpen={isSidebarOpen}
+                      toggleSidebar={toggleSidebar}
+                    />
+                  </div>
+                  <div className={!isSidebarOpen ? "flex-grow" : "flex-grow"}>
+                    <Topbar />
+                    {children}
+                  </div>
                 </div>
-                <div className={!isSidebarOpen ? "flex-grow" : "flex-grow"}>
-                  <Topbar />
-                  {children}
-                </div>
-              </div>
-            )}
-          </SidebarProvider>
+              )}
+            </SidebarProvider>
+          </StudentsProvider>
         </AuthProvider>
       </body>
     </html>
